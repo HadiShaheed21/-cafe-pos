@@ -5514,8 +5514,8 @@ function seedInstallDefaults(): void {
   // US NAVY assisted checkout: static UPI details for the payment step. The QR
   // itself is generated from `shop_upi_id` at request time (never a placeholder
   // image); staff can change any of these in POS Settings.
-  insert('shop_upi_id', 'usnavy2096@fbl');
-  insert('shop_upi_payee_name', 'US NAVY');
+  insert('shop_upi_id', '');
+  insert('shop_upi_payee_name', '');
   insert('bill_template', 'classic');
   insert('bill_footer_message', '');
   insert('bill_show_name', 'true');

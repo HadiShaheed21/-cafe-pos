@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: cafe-pos
+    runtime: node
+    plan: starter
+    buildCommand: npm ci --include=dev --ignore-scripts && npm rebuild better-sqlite3 --build-from-source && npm run build:frontend && npm run build
+    startCommand: node dev-server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: FLO_DB_PATH
+        value: /data/flo.db
+      - key: FLO_REQUIRE_PERSISTENT_STORAGE
+        value: "true"
+      - key: FLO_BACKUP_DIR
+        value: /data/backups
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FLO_ALLOWED_ORIGINS
+        sync: false
+    disk:
+      name: cafe-data
+      mountPath: /data
+      sizeGB: 1

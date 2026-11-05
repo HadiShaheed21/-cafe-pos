@@ -19,6 +19,7 @@ import { staticRouteRateLimit, corsOptions, getUserAuthStatus, isAllowedPrivateI
 import { initFromDb as initWhatsAppFromDb } from './services/whatsapp';
 import { API_JSON_BODY_LIMIT } from './http-limits';
 import { buildCspHeader } from './csp';
+import { createProxyMiddleware } from 'http-proxy-middleware';
 import { resolveContainedPath } from './lib/path-containment';
 
 let server: http.Server | null = null;
@@ -254,6 +255,25 @@ export function startServer(): Promise<void> {
 
     // ── All API routes ─────────────────────────────────────────────────
     registerRoutes(app);
+
+    // ── Reverse proxy for KDS and Server App ────────────────────────────────────
+    // These internal services (KDS on port 3002, Server App on port 3003) run
+    // within the same Render web service as the main POS. The proxy must be
+    // registered before the frontend SPA fallback so /kds and /server-app paths
+    // are not caught by the SPA catch-all route.
+    app.use('/kds', createProxyMiddleware({
+      target: 'http://127.0.0.1:3002',
+      changeOrigin: true,
+      ws: true,       // <─ critical: enable WebSocket upgrade forwarding
+      pathRewrite: { '^/kds': '' }  // strip /kds prefix before forwarding
+    }));
+
+    app.use('/server-app', createProxyMiddleware({
+      target: 'http://127.0.0.1:3003',
+      changeOrigin: true,
+      // ws: false   // Server App does not use WebSocket
+      pathRewrite: { '^/server-app': '' }  // strip /server-app prefix when forwarding
+    }));
 
     // ── Serve Next.js static export ────────────────────────────────────
     // Must come AFTER API routes so /api/* is not caught by the SPA fallback.

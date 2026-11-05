@@ -1828,9 +1828,9 @@
     "anonymousDataTitle": "Anonymous usage data",
     "back": "Back",
     "businessName": "Store Name",
-    "businessNamePlaceholder": "US Navy",
+    "businessNamePlaceholder": "CAFE POS",
     "chooseCountry": "Choose Your Country",
-    "chooseCountryHint": "US Navy uses your country to set the correct currency, GST format, and starter catalog.",
+    "chooseCountryHint": "CAFE POS uses your country to set the correct currency, GST format, and starter catalog.",
     "chooseLanguage": "Choose Your Language",
     "chooseLanguageHint": "Pick the language for this setup flow before choosing the country.",
     "cloudEnableHint": "Cloud Services are optional and disabled by default. Enable them to connect FloCafe with FloAdmin for features such as RevFlo reporting, device pairing, and supported account services.",
@@ -1915,7 +1915,7 @@
     "termsIntro": "I agree to the FloPOS",
     "timezoneHint": "Pre-filled from your country. Stores in multi-timezone countries can choose their actual local timezone.",
     "timezoneLabel": "Timezone",
-    "welcome": "Welcome to US Navy"
+    "welcome": "Welcome to CAFE POS"
   },
   "staff": {
     "addButton": "Add Staff",
