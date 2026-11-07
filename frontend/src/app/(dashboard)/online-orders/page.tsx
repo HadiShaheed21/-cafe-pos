@@ -503,7 +503,7 @@ function OrderDetailPanel({
         )}
 
         <p className="mt-6 text-xs text-muted-foreground">
-          <Link href="/shop" className="underline">{t('storefrontLink')}</Link>
+          <Link href="/pos" className="underline">POS</Link>
         </p>
       </div>
     </div>
