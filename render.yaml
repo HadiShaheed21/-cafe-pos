@@ -3,7 +3,7 @@ services:
     name: cafe-pos
     runtime: node
     plan: free
-    buildCommand: npm ci --include=dev && npm run build:hosted
+    buildCommand: npm ci --ignore-scripts --include=dev && npm run build:hosted
     startCommand: npm run start:hosted
     healthCheckPath: /api/health
     envVars:
